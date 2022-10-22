@@ -14,7 +14,7 @@ const { createServer } = require("./utils/serverUtils");
 ConnectDB();
 
 const app = createServer();
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () =>
