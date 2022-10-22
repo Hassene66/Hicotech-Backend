@@ -5,6 +5,7 @@ info:
   title: HiCotech API 2021
 
 servers:
+  - url: "https://hicoach-api.herokuapp.com/api"
   - url: "http://localhost:5000/api"
   - url: "http://127.0.0.1:5000/api"
 
