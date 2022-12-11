@@ -18,6 +18,7 @@ const trainingGroundSchema = new mongoose.Schema(
     coordinates: {
       type: [Number],
       index: "2dsphere",
+      required:false
     },
   },
   { timestamps: true }
