@@ -5,7 +5,7 @@ const {
   findNotification,
   deleteNotification,
   updateNotification,
-} = require("../controllers/notificationController");
+} = require("../../controllers/notificationController");
 // Get All users
 router.get("/notification", findAllNotifications);
 // Add user
