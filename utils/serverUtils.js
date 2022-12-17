@@ -15,6 +15,8 @@ const abonnement = require("../routes/api/subscriptionRoutes");
 const statisticObjective = require("../routes/api/statisticobjectiveRoutes");
 const skillObjective = require("../routes/api/skillObjectiveRoutes");
 const alert = require("../routes/api/alertRoutes");
+const notification = require("../routes/api/notificationRoutes");
+
 
 const express = require("express");
 const cors = require("cors");
@@ -43,7 +45,8 @@ const createServer = () => {
     assignChallenge,
     alert,
     statisticObjective,
-    skillObjective
+    skillObjective,
+    notification
   );
 
   app.use(errorHandler);
