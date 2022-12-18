@@ -16,7 +16,7 @@ const statisticObjective = require("../routes/api/statisticobjectiveRoutes");
 const skillObjective = require("../routes/api/skillObjectiveRoutes");
 const alert = require("../routes/api/alertRoutes");
 const notification = require("../routes/api/notificationRoutes");
-const fcm_certificate = require("./hicoach-11387-firebase-adminsdk-bcr1o-d9427c8009.json");
+const fcm_certificate = require("../certificate.json");
 
 const express = require("express");
 const cors = require("cors");
