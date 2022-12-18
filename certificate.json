@@ -1,12 +1,12 @@
 {
   "type": "service_account",
-  "project_id": "${process.env.project_id}",
-  "private_key_id": "${process.env.private_key_id}",
-  "private_key": "${process.env.private_key}",
-  "client_email": "${process.env.client_email}",
-  "client_id": "${process.env.client_id}",
+  "project_id": "hicoach-11387",
+  "private_key_id": "7dd2a6a1636d9310ca06f728bc2460b8e14a31de",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCva8R3VkS8eJpU\n5STlZmQ2PWyjW0MBDbl6fvKJAPB5RGZnSAEcW1ECnhSibelX2QIYuKJgXnShaxVL\nGWOTSxeFQ9A6H9A+EUoBkVTVboQ5sHZsYmmf/NTQQaVRxDBVnzKchc1+OKPbI0pj\nqg/S/Y4hacGzpAFTgm+Dxj3vQz+FklAT8hYjz+0J6bgogtcnzp3in5jBNUUKfquU\nH8KUpt7AHe8Zh367l1kR56dgGi+9vh98a70tSBWEVIUSusgN1plNSw1LT9W2Fgby\ntMwh6JQI2gUlSE3ZYCLRi9rmIi2jx1IbKsPq2vGyO0AvBzDmoJ+Dy7RGI5m6dyzY\nTh1nZYyVAgMBAAECggEAKoUvPpPxHlQHaKuQWXCLuuABrMkKwT8f5dLOnCnXoDVV\nsxQvfL2fscg6jTKiHHKUAQUECuLqV1Qa+bSiP8o0Xc+VsfkTI3BSZXXiP8fFkiw1\nUEk8fBSvSvmWhm7NHnvzqx/9suoswYnY1raallRydqPpWU9YKPNVb3YGfi/pPklV\nlup0MhfET6/T4YUk43jNRoE4PfNxOaYWhZTjRpherlwLcHxpWTEJJSxyl36NnRmt\ndgFCHLwyGMRAPsBh713UBF89LnoF0W4kW6Gi9xb5+QagvMSY41T5+Z5b1NAcwt07\nr9R/zpAM+fLqSQp3nD3fzfIV1gApYMkOco7WyBBxYQKBgQDUVXHzDDHDKFHO9y4J\nrJY4ysRlT5yrbqoUXM8YjWUvygkG2711FKVR9M6lI+mLzcR096AoLKJ+QkkJPR5i\n4SWaXPv4h8fNBVWytwquIRgDogWx9fE5EWhehuksnqbWLDh69B0QTVepefzqzmmG\nAArfmdDfPoFE6/1kTVqPJjf0RQKBgQDTfwFldFR0IiIO9h+G4NMImCaDDwozwiXL\nBixA/zqSdzXLM3hBTgPOPUMrkmWHdYrdOxBooQu3ZH5rBJ4FFTs1+CUXfer+UBu7\nAx+9zJHbu5QJYu+gV0qqx4o8ETCvrLTW7QkM1jeF+UAcSBF0KWIbe/I2xqQbHVIt\nG86z2FxEEQKBgQCVw8LArHw466pwMZYuSqYWXqaR0sptfHvIKwIDjk+tmnItfTYv\na6WDnglXH3JuIm+MFNDJJVpjdbtwIcTZ93X/X9B1pse9iyK8EDEfSsZWYaRktlUz\nbFzSN5Ql3a1NaRlZV+9b/UF0j09eCsMROdxxhFt36u1gwJcUdR8H0uwqhQKBgQCk\nNysYYVjpy07ymvwjuBFjzO+qN1VOluLNXv+hgAs0ikdEfbRT0IV3721mOYeHxCaM\nXD4DX3g/b1IROkaP38pXv1LdiLGbwQunC2fr8RkXqe/p0d4Je33IWKLmvNo2rTzE\n3Mt4IiR+a+fxjauvrCo2+Og6y8XEH+IckEjQr6AEYQKBgQCjPlQQl4OnMGA06kKB\nxVlL3zXKWSGCCZHX32MHz0NaAubhRVzA1fq3nirjYJCfpOaZ5APneYyipO4DYKbZ\nbMCw+3lmng6ciStsQM6eev0cmSpeCzlgNDxQdDZ5TgVHiyNGzHKvlw/Joqhr9Dzv\nHOTVKPtC+f78uxXyv1eIUPIAng==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-bcr1o@hicoach-11387.iam.gserviceaccount.com",
+  "client_id": "100540621927275073935",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "${process.env.client_x509_cert_url}"
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-bcr1o%40hicoach-11387.iam.gserviceaccount.com"
 }
