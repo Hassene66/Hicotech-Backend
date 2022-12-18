@@ -16,7 +16,7 @@ const statisticObjective = require("../routes/api/statisticobjectiveRoutes");
 const skillObjective = require("../routes/api/skillObjectiveRoutes");
 const alert = require("../routes/api/alertRoutes");
 const notification = require("../routes/api/notificationRoutes");
-
+const fcm_certificate = require("./hicoach-11387-firebase-adminsdk-bcr1o-d9427c8009");
 
 const express = require("express");
 const cors = require("cors");
@@ -25,7 +25,7 @@ const admin = require("firebase-admin");
 
 
 admin.initializeApp({
-  credential: admin.credential.cert(process.env.fcm_certificate),
+  credential: admin.credential.cert(fcm_certificate),
 });
 const createServer = () => {
   const app = express();
