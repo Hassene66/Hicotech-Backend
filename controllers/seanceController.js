@@ -85,7 +85,7 @@ exports.cancelSession = (req, res) => {
       select: 'fcm_key'
     })
     .exec()
-    .then((seance) => {
+    .then(async (seance) => {
       if (!seance) {
         return res.status(404).send({
           message: "Seance not found with id " + req.params.seanceId,
