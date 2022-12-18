@@ -21,7 +21,12 @@ const notification = require("../routes/api/notificationRoutes");
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const admin = require("firebase-admin");
 
+
+admin.initializeApp({
+  credential: admin.credential.cert(process.env.fcm_certificate),
+});
 const createServer = () => {
   const app = express();
   app.use(express.json());

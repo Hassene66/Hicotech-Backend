@@ -1,7 +1,8 @@
+const Schedular = require("node-schedule");
+const admin = require("firebase-admin");
 const Seance = require("../models/seanceModel");
 const sendEmail = require("../utils/sendEmail");
 var jsrender = require("jsrender");
-const Schedular = require("node-schedule");
 const dateToCron = (date) => {
   const minutes = date.getMinutes();
   const hours = date.getHours() - 1;
@@ -79,7 +80,10 @@ exports.cancelSession = (req, res) => {
 
   Seance.findByIdAndUpdate(req.params.seanceId, req.body, { new: true })
     .populate("creactedBy")
-    .populate("player")
+    .populate({
+      path: 'player',
+      select: 'fcm_key'
+    })
     .exec()
     .then((seance) => {
       if (!seance) {
@@ -87,7 +91,6 @@ exports.cancelSession = (req, res) => {
           message: "Seance not found with id " + req.params.seanceId,
         });
       }
-      console.log(seance?.player?.firstName);
       const template = jsrender.templates("./templates/annulerSeance.html");
 
       const message = template.render({
@@ -110,6 +113,16 @@ exports.cancelSession = (req, res) => {
       } catch (err) {
         return next(new ErrorResponse("Email n'a pas pu être envoyé", 500));
       }
+      await admin.messaging().sendMulticast({
+        tokens: seance?.player?.fcm_key,
+        notification: {
+          title: "Session cancelled!",
+          body: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
+        },
+        android: {
+          priority: "high",
+        },
+      });
     })
     .catch((err) => {
       if (err.kind === "ObjectId") {
