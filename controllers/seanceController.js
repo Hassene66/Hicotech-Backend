@@ -1,6 +1,7 @@
 const Schedular = require("node-schedule");
 const admin = require("firebase-admin");
 const Seance = require("../models/seanceModel");
+const Notification = require("../models/notificationModal");
 const sendEmail = require("../utils/sendEmail");
 var jsrender = require("jsrender");
 const dateToCron = (date) => {
@@ -123,6 +124,7 @@ exports.cancelSession = (req, res) => {
         data: seance,
       };
 
+      await Notification.create(notificationData);
       await admin.messaging().sendMulticast({
         tokens: seance?.player?.fcm_key,
         notification: {
