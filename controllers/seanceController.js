@@ -113,6 +113,16 @@ exports.cancelSession = (req, res) => {
       } catch (err) {
         return next(new ErrorResponse("Email n'a pas pu être envoyé", 500));
       }
+
+      const notificationData = {
+        title: "Session cancelled!",
+        description: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
+        createdBy: seanceData?.creactedBy?._id,
+        assignedTo: seance?.player?._id,
+        targetScreen: "CLAIM_DETAIL",
+        data: seance,
+      };
+
       await admin.messaging().sendMulticast({
         tokens: seance?.player?.fcm_key,
         notification: {
