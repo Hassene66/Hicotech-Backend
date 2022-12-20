@@ -92,7 +92,7 @@ exports.cancelSession = (req, res) => {
           message: "Seance not found with id " + req.params.seanceId,
         });
       }
-      const template = jsrender.templates("./templates/annulerSeance.html");
+/*      const template = jsrender.templates("./templates/annulerSeance.html");
 
       const message = template.render({
         P_firstname: seance?.player?.firstName,
@@ -101,7 +101,7 @@ exports.cancelSession = (req, res) => {
         C_lastname: seance?.creactedBy?.lastName,
         date: seance?.dateSeance.toISOString().slice(0, 10),
         raison: seance?.sessionCancelled?.reason,
-      });
+      });*/
       const notificationData = {
         title: "Session cancelled!",
         description: `${seance?.creactedBy?.firstName} ${seance?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
@@ -122,7 +122,7 @@ exports.cancelSession = (req, res) => {
           priority: "high",
         },
       });
-      
+      /*
      try {
         sendEmail({
           email: seance.player.email,
@@ -131,16 +131,16 @@ exports.cancelSession = (req, res) => {
         });
       } catch (err) {
         return next(new ErrorResponse("Email n'a pas pu être envoyé", 500));
-      }
+      }*/
       return res.send(seance);
     }).catch((err) => {
       if (err.kind === "ObjectId") {
         return res.status(404).send({
-          message: "Seance not found with id " + req.params.seanceId,
+          message: "Session not found with id " + req.params.seanceId,
         });
       }
       return res.status(500).send({
-        message: "Something wrong updating note with id " + req.params.seanceId,
+        message: "Something wrong while cancelling the session "
       });
     });
 };
