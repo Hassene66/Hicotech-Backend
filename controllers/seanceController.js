@@ -1,7 +1,7 @@
 const Schedular = require("node-schedule");
 const admin = require("firebase-admin");
 const Seance = require("../models/seanceModel");
-const Notification = require("../models/notificationModal");
+const Notification = require("../models/notificationModel");
 const sendEmail = require("../utils/sendEmail");
 var jsrender = require("jsrender");
 const dateToCron = (date) => {
