@@ -109,32 +109,30 @@ exports.cancelSession = (req, res) => {
           subject: "Annulation Séance ",
           message,
         });
-
+        const notificationData = {
+          title: "Session cancelled!",
+          description: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
+          createdBy: seanceData?.creactedBy?._id,
+          assignedTo: seance?.player?._id,
+          targetScreen: "CLAIM_DETAIL",
+          data: seance,
+        };
+  
+        await Notification.create(notificationData);
+        await admin.messaging().sendMulticast({
+          tokens: seance?.player?.fcm_key,
+          notification: {
+            title: "Session cancelled!",
+            body: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
+          },
+          android: {
+            priority: "high",
+          },
+        });
         return res.send(seance);
       } catch (err) {
         return next(new ErrorResponse("Email n'a pas pu être envoyé", 500));
       }
-
-      const notificationData = {
-        title: "Session cancelled!",
-        description: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
-        createdBy: seanceData?.creactedBy?._id,
-        assignedTo: seance?.player?._id,
-        targetScreen: "CLAIM_DETAIL",
-        data: seance,
-      };
-
-      await Notification.create(notificationData);
-      await admin.messaging().sendMulticast({
-        tokens: seance?.player?.fcm_key,
-        notification: {
-          title: "Session cancelled!",
-          body: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
-        },
-        android: {
-          priority: "high",
-        },
-      });
     })
     .catch((err) => {
       if (err.kind === "ObjectId") {
