@@ -97,36 +97,33 @@ exports.cancelSession = (req, res) => {
       const message = template.render({
         P_firstname: seance?.player?.firstName,
         P_lastname: seance?.player?.lastName,
-        C_firstname: seanceData?.creactedBy?.firstName,
-        C_lastname: seanceData?.creactedBy?.lastName,
+        C_firstname: seance?.creactedBy?.firstName,
+        C_lastname: seance?.creactedBy?.lastName,
         date: seance?.dateSeance.toISOString().slice(0, 10),
         raison: seance?.sessionCancelled?.reason,
       });
       const notificationData = {
         title: "Session cancelled!",
-        description: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
-        createdBy: seanceData?.creactedBy?._id,
+        description: `${seance?.creactedBy?.firstName} ${seance?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
+        createdBy: seance?.creactedBy?._id,
         assignedTo: seance?.player?._id,
         targetScreen: "CLAIM_DETAIL",
         data: seance,
       };
-      console.log("seance?.player?.fcm_key : " + seance?.player?.fcm_key)
-      console.log("seanceData?.creactedBy: " + seanceData?.creactedBy)
-      const res = await Notification.create(notificationData);
-      console.log("res : " + res)
+      await Notification.create(notificationData);
 
       await admin.messaging().sendMulticast({
         tokens: seance?.player?.fcm_key,
         notification: {
           title: "Session cancelled!",
-          body: `${seanceData?.creactedBy?.firstName} ${seanceData?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
+          body: `${seance?.creactedBy?.firstName} ${seance?.creactedBy?.lastName} has canceled the session scheduled for ${seance?.dateSeance.toISOString().slice(0, 10)} for the following reason : ${seance?.sessionCancelled?.reason} `,
         },
         android: {
           priority: "high",
         },
       });
       
-     /* try {
+     try {
         sendEmail({
           email: seance.player.email,
           subject: "Annulation Séance ",
@@ -134,10 +131,9 @@ exports.cancelSession = (req, res) => {
         });
       } catch (err) {
         return next(new ErrorResponse("Email n'a pas pu être envoyé", 500));
-      }*/
+      }
       return res.send(seance);
-    })
-    .catch((err) => {
+    }).catch((err) => {
       if (err.kind === "ObjectId") {
         return res.status(404).send({
           message: "Seance not found with id " + req.params.seanceId,
