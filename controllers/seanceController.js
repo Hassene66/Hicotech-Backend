@@ -110,8 +110,11 @@ exports.cancelSession = (req, res) => {
         targetScreen: "CLAIM_DETAIL",
         data: seance,
       };
+      console.log("seance?.player?.fcm_key : " + seance?.player?.fcm_key)
+      console.log("seanceData?.creactedBy: " + seanceData?.creactedBy)
+      const res = await Notification.create(notificationData);
+      console.log("res : " + res)
 
-      await Notification.create(notificationData);
       await admin.messaging().sendMulticast({
         tokens: seance?.player?.fcm_key,
         notification: {
@@ -123,7 +126,7 @@ exports.cancelSession = (req, res) => {
         },
       });
       
-      try {
+     /* try {
         sendEmail({
           email: seance.player.email,
           subject: "Annulation Séance ",
@@ -131,7 +134,7 @@ exports.cancelSession = (req, res) => {
         });
       } catch (err) {
         return next(new ErrorResponse("Email n'a pas pu être envoyé", 500));
-      }
+      }*/
       return res.send(seance);
     })
     .catch((err) => {
