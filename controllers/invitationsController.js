@@ -38,8 +38,9 @@ exports.createInvitation = async (req, res) => {
     });
     res.send(invitation);
   } catch (err) {
-    return next(new ErrorResponse("Email n'a pas pu être envoyé", 500));
-  }
+    return res.status(500).send({
+      message: err.message || "Something wrong while creating the invitation.",
+    });
 };
 
 // Retrieve all invitations from the database.
