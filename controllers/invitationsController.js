@@ -41,6 +41,7 @@ exports.createInvitation = async (req, res) => {
     return res.status(500).send({
       message: err.message || "Something wrong while creating the invitation.",
     });
+  }
 };
 
 // Retrieve all invitations from the database.
