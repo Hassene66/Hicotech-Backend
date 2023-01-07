@@ -29,6 +29,7 @@ exports.createInvitation = async (req, res) => {
     firstName: invitation.userData.firstName,
     creacteBy: user,
     id: invitation.id,
+    code : invitation.id.substr(0,6)
   });
   try {
     await sendEmail({
